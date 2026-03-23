@@ -1,128 +1,118 @@
-# 🔐 JWT Authentication using Spring Boot
+# 📘 Student Management REST API using Spring Boot
 
-This project demonstrates the implementation of **JWT (JSON Web Token) authentication** using **Spring Boot, Spring Security, MySQL, and Postman**.
-
-The system verifies user credentials from the database and generates a **JWT token** upon successful login. This token is then used to access protected API endpoints.
+This project demonstrates the implementation of a REST API using Spring Boot to perform CRUD (Create, Read, Update, Delete) operations on student data stored in a MySQL database.
 
 ---
 
-# Technologies Used
-
-- Java
-- Spring Boot
-- Spring Security
-- JWT (JSON Web Token)
-- MySQL
-- Postman
-- Eclipse IDE
+## Technologies Used
+Java, Spring Boot, Spring Data JPA (Hibernate), MySQL, Postman, Apache Tomcat (Embedded Server), Eclipse IDE
 
 ---
 
-# Project Workflow
-
-1. Run the Spring Boot application
-2. Create and configure the MySQL database
-3. Insert user credentials into the database
-4. Authenticate the user using Postman
-5. Generate JWT token
-6. Use the token to access protected API endpoints
+## Aim
+To develop a RESTful web service that performs CRUD operations on student data using Spring Boot and MySQL.
 
 ---
 
-# Step 1: Running the Spring Boot Application
-
-The JWT Authentication application was executed as a **Java Application** in Eclipse.  
-After running the project successfully, the **embedded Tomcat server started on port 8080**.
-
-<img width="1007" height="279" alt="Screenshot 2026-03-11 095450" src="https://github.com/user-attachments/assets/86b3d449-234b-4d82-be23-f4b191e992b2" />
-
+## Project Workflow
+Run the Spring Boot application → Create MySQL database → Create student table → Connect application to database → Perform CRUD operations using Postman → Verify data in database
 
 ---
 
-# Step 2: Creating the Database
+## Running the Spring Boot Application
+The application was run as a Java Application in Eclipse and the embedded Tomcat server started on port 8080.
 
-A new database named **jwtauth** was created in MySQL to store user authentication details.
-
-<img width="435" height="636" alt="Screenshot 2026-03-11 095027" src="https://github.com/user-attachments/assets/75998d74-05c3-4df5-8c5c-70a8f23d04b8" />
-.
+<img width="1037" height="406" alt="Screenshot 2026-03-23 105301" src="https://github.com/user-attachments/assets/242ca71d-87e0-486f-9d73-11c241daafe7" />
 
 ---
 
-# Step 3: Creating Users Table
+## Database Creation
+A database named **fullstack** was created.
 
-Inside the **jwtauth database**, a table named **users** was created to store login credentials such as username and password.
+CREATE DATABASE fullstack;
+<img width="383" height="477" alt="Screenshot 2026-03-23 103656" src="https://github.com/user-attachments/assets/9a4e6f2d-e41f-4e7f-8ad8-7faeb3ab9583" />
 
-Example structure:
 
-| id | username | password |
-|----|----------|----------|
-| 1  | ram      | 1234     |
-
-<img width="647" height="101" alt="Screenshot 2026-03-11 100717" src="https://github.com/user-attachments/assets/c02aa049-1d98-4ea3-b5f8-a093aa100ba1" />
-<img width="445" height="227" alt="Screenshot 2026-03-11 095014" src="https://github.com/user-attachments/assets/3f745089-ac5e-4a24-b71b-f4a89e0c11c0" />
-
----
-
-# Step 4: Login Request using Postman
-
-A **POST request** was sent using Postman to authenticate the user.
-
-API Endpoint:
-
-POST http://localhost:8080/api/login
-
-Parameters sent:
-
-username = ram  
-password = 1234
-
-If the credentials are valid, the server generates a **JWT token**.
-
-<img width="1261" height="736" alt="Screenshot 2026-03-11 094958" src="https://github.com/user-attachments/assets/974cfadf-cf7a-465c-82ab-840e929b9507" />
 
 
 ---
 
-# Step 5: Accessing the Protected API
+## Table Creation
+A table named **student** was created.
 
-The generated JWT token was copied and added to the **Authorization header** in Postman using the Bearer token format.
+CREATE TABLE student (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);
 
-Authorization Header Format:
+Table Structure:
+<img width="1015" height="566" alt="Screenshot 2026-03-23 103644" src="https://github.com/user-attachments/assets/745c77d7-51bc-4514-b91a-8c097588956b" />
 
-Authorization: Bearer <JWT Token>
 
-Then a **GET request** was sent to the protected API endpoint.
 
-API Endpoint:
 
-GET http://localhost:8080/api/hello
+## CRUD Operations
+<img width="203" height="121" alt="Screenshot 2026-03-23 102859" src="https://github.com/user-attachments/assets/2238d05e-fef6-41f8-b50f-fb3077e6fc6c" />
 
-If the token is valid, the server verifies it and returns a success message.
+### CREATE (POST)
+POST http://localhost:8080/api/students  
 
-<img width="1260" height="770" alt="Screenshot 2026-03-11 094929" src="https://github.com/user-attachments/assets/1c757586-1dd0-4114-96e2-8b2ffb789c24" />
+<img width="1266" height="700" alt="Screenshot 2026-03-23 103055" src="https://github.com/user-attachments/assets/a2395fdf-3e38-42cf-a659-956fe518390d" />
+
+### READ (GET)
+
+GET ALL:
+GET http://localhost:8080/api/students  
+
+<img width="1266" height="806" alt="Screenshot 2026-03-23 103023" src="https://github.com/user-attachments/assets/5f6c5b32-c9cf-4e4c-adab-c96ecc0aa664" />
+
+<img width="435" height="383" alt="Screenshot 2026-03-23 103002" src="https://github.com/user-attachments/assets/c8f06a2e-01fa-4632-8b1e-93c7cef29bba" />
+
+
+<img width="435" height="383" alt="Screenshot 2026-03-23 103002" src="https://github.com/user-attachments/assets/78017dc0-0f92-4404-809b-c8dec49b28e4" />
+
+
+### UPDATE (PUT)
+PUT http://localhost:8080/api/students/1  
+
+Request Body:
+{
+  "name": "Updated Name",
+  "email": "updated@gmail.com"
+}
+
+<img width="1287" height="638" alt="Screenshot 2026-03-23 103232" src="https://github.com/user-attachments/assets/8453d844-e4b2-423b-8426-5ba7a08f202b" />
 
 
 ---
 
-# API Endpoints
+### DELETE (DELETE)
+DELETE http://localhost:8080/api/students/1  
+
+<img width="1270" height="713" alt="Screenshot 2026-03-23 103304" src="https://github.com/user-attachments/assets/1473238e-3919-4645-b5fa-83122cd0e420" />
+
+
+---
+
+## API Endpoints
 
 | Method | Endpoint | Description |
-|------|------|------|
-| POST | /api/login | Authenticate user and generate JWT token |
-| GET | /api/hello | Protected API that requires JWT token |
+|--------|----------|-------------|
+| POST   | /api/students      | Create student |
+| GET    | /api/students      | Get all students |
+| GET    | /api/students/{id} | Get student by ID |
+| PUT    | /api/students/{id} | Update student |
+| DELETE | /api/students/{id} | Delete student |
 
 ---
 
-# Result
-
-JWT Authentication was successfully implemented using Spring Boot and Spring Security.  
-The application generated a valid JWT token after login and allowed access to secured API endpoints using the token.
+## Result
+The REST API was successfully implemented and tested. All CRUD operations were performed and verified using Postman and MySQL database.
 
 ---
 
-# Learning Outcome
+## Learning Outcome
+Learned REST API development, Spring Boot integration, MySQL connectivity, JPA usage, and API testing using Postman.
 
-- Learned how JWT authentication works
-- Implemented secure REST APIs using Spring Boot
-- Integrated Spring Boot with MySQL database
-- Tested APIs using Postman
+---
