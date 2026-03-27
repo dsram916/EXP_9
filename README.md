@@ -88,9 +88,6 @@ JWT token is generated successfully.
 <img width="1260" height="770" alt="Screenshot 2026-03-11 094929" src="https://github.com/user-attachments/assets/0f3df3c6-d267-425a-b1f6-38681d2b2473" />
 
 
-### Endpoint
-GET http://localhost:8080/api/hello  
-
 ### Header
 Authorization: Bearer <JWT_TOKEN>
 
